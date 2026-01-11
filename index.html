@@ -20,21 +20,38 @@
       }
     }
   </script>
+
+  <style>
+        @keyframes slideFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .animate-slide-left {
+            animation: slideFromLeft 0.8s ease-out forwards;
+        }
+    </style>
 </head>
 
 <body class="font-sans text-gray-800">
 
 <!-- ================= HEADER ================= -->
-<header class="fixed top-0 left-0 w-full bg-white shadow z-50">
+<header class="fixed top-0 left-0 w-full bg-white shadow z-50" style="background-color: #090c0c;">
   <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
     <h1 class="text-2xl font-bold" style="color: #6ad0e1;">RoadKonsept</h1>
 
     <nav class="hidden md:flex space-x-8">
-      <a href="#features" class="transition" style="color: inherit;" onmouseover="this.style.color='#6ad0e1'" onmouseout="this.style.color='inherit'">Products</a>
-      <a href="#gallery" class="transition" style="color: inherit;" onmouseover="this.style.color='#6ad0e1'" onmouseout="this.style.color='inherit'">Gallery</a>
-      <a href="#reviews" class="transition" style="color: inherit;" onmouseover="this.style.color='#6ad0e1'" onmouseout="this.style.color='inherit'">Reviews</a>
-      <a href="#about" class="transition" style="color: inherit;" onmouseover="this.style.color='#6ad0e1'" onmouseout="this.style.color='inherit'">About</a>
-      <a href="#contact" class="transition" style="color: inherit;" onmouseover="this.style.color='#6ad0e1'" onmouseout="this.style.color='inherit'">Contact</a>
+      <a href="#features" class="transition" style="color: #2e2f2f;" onmouseover="this.style.color='#6ad0e1'" onmouseout="this.style.color='#2e2f2f'">Products</a>
+      <a href="#gallery" class="transition" style="color: #2e2f2f;" onmouseover="this.style.color='#6ad0e1'" onmouseout="this.style.color='#2e2f2f'">Gallery</a>
+      <a href="#reviews" class="transition" style="color: #2e2f2f;" onmouseover="this.style.color='#6ad0e1'" onmouseout="this.style.color='#2e2f2f'">Reviews</a>
+      <a href="#about" class="transition" style="color: #2e2f2f;" onmouseover="this.style.color='#6ad0e1'" onmouseout="this.style.color='#2e2f2f'">About</a>
+      <a href="#contact" class="transition" style="color: #2e2f2f;" onmouseover="this.style.color='#6ad0e1'" onmouseout="this.style.color='#2e2f2f'">Contact</a>
     </nav>
 
     <button id="menuBtn" class="md:hidden text-2xl">☰</button>
@@ -51,9 +68,9 @@
 </header>
 
 <!-- ================= HERO ================= -->
-<section class="pt-32 pb-20 bg-cover bg-center bg-no-repeat" style="background-image: url('images/heropagebg.png');">
+<section class="pt-72 pb-20 bg-cover bg-center bg-no-repeat" style="background-image: url('images/heropagebg.png');">
   <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-    <div class="bg-white bg-opacity-70 p-8 rounded-lg">
+    <div class="bg-white bg-opacity-50 p-10 rounded-lg" id="heroDiv">
       <h2 class="text-4xl md:text-5xl font-bold mb-6">
         Driven by Passion. Designed as Art.
       </h2>
@@ -186,7 +203,7 @@ Inspired by car culture, design, and motion, we create experiences for enthusias
 <!-- ================= FOOTER ================= -->
 <footer class="bg-gray-900 text-white py-8">
   <div class="max-w-7xl mx-auto px-6 text-center">
-    <p>© 2026 BrandName. All rights reserved.</p>
+    <p>© 2026 RoadKonsept. All rights reserved.</p>
   </div>
 </footer>
 
@@ -280,6 +297,23 @@ Inspired by car culture, design, and motion, we create experiences for enthusias
   // Start auto-play on page load
   startAutoPlay();
 </script>
+
+<script>
+        const heroDiv = document.getElementById('heroDiv');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-slide-left');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        observer.observe(heroDiv);
+    </script>
 
 </body>
 </html>
